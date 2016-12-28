@@ -1,0 +1,19 @@
+<p>
+ {{title}}
+</p>
+<div class="container">
+<button
+       kendoButton
+       (click)="onButtonClick()"
+       [primary]="true">
+       My Kendo UI Button
+     </button>
+     <br />
+
+<kendo-dropdownlist [data]="listItems"
+                    [textField]="'text'"
+                    [valueField]="'value'" >
+
+</kendo-dropdownlist>
+
+</div>

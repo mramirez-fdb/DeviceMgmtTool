@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-
+import{UserService} from "./services/user.service";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss'],
+  providers: [UserService]
 })
 export class AppComponent {
-  title = 'app works!';
+  title = 'app works very well still!';
+
 }

@@ -1,0 +1,57 @@
+<p>
+  device-queue works!
+</p>
+
+<kendo-grid [data]="gridView" [selectable]="true" [pageSize]="pageSize" [skip]="skip" [pageable]="{buttonCount: 4, info: true, type: 'numeric', pageSizes: true, previousNext: true}"
+  [height]="500" (pageChange)="pageChange($event)">
+  <kendo-grid-toolbar>
+    <button (click)="addProduct()" class="k-button k-button-icontext k-grid-add">Add new</button>
+  </kendo-grid-toolbar>
+  <!--<kendo-grid-column field="">
+    <template kendoCellTemplate let-dataItem let-rowIndex="rowIndex">
+      Row: {{rowIndex + 1}}
+    </template>
+  </kendo-grid-column>-->
+  <kendo-grid-column field="Id">
+
+  </kendo-grid-column>
+  <kendo-grid-column field="GTIN">
+    <template kendoHeaderTemplate let-column let-columnIndex="columnIndex">
+      {{column.field}}({{columnIndex}})
+    </template>
+  </kendo-grid-column>
+  <kendo-grid-column field="GudidBrndNm">
+    <template kendoHeaderTemplate let-column let-columnIndex="columnIndex">
+      {{column.field}}({{columnIndex}})
+    </template>
+  </kendo-grid-column>
+  <kendo-grid-column field="LblrNm">
+    <template kendoHeaderTemplate let-column let-columnIndex="columnIndex">
+      {{column.field}}({{columnIndex}})
+    </template>
+  </kendo-grid-column>
+  <kendo-grid-column field="LbldMedDevIdntfrs">
+    <template kendoCellTemplate let-dataItem>
+      <div *ngIf="dataItem.LbldMedDevIdntfrs">
+        <span class="label label-primary">{{dataItem.LbldMedDevIdntfrs.length}}</span>
+      </div>
+    </template>
+  </kendo-grid-column>
+  <kendo-grid-column>
+    <template kendoCellTemplate let-dataItem>
+      <button (click)="onEdit(dataItem)" class="k-button k-button-icontext k-grid-edit">Edit</button>
+    </template>
+  </kendo-grid-column>
+  <template kendoDetailTemplate let-dataItem>
+    <section *ngIf="dataItem.LbldMedDevCtlgNbrs">
+      <header>Ctlg Numbers</header>
+      <div *ngFor="let item of dataItem.LbldMedDevCtlgNbrs">
+        <span>{{item.Id}}</span>&nbsp;&nbsp;
+        <span>{{item.Nbr}}</span>
+      </div>
+    </section>
+  </template>
+
+</kendo-grid>
+<kendo-grid-edit-form [model]="dataItemToEdit" (cancel)="onCancel()" (save)="onSave($event)">
+</kendo-grid-edit-form>

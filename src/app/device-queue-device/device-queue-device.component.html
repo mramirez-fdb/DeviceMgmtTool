@@ -1,0 +1,32 @@
+<kendo-dialog *ngIf="active" title="Edit" (close)="onCancel()">
+            <form [formGroup]="editForm">
+                <div>
+                    <label for="GudidBrndNm">GudidBrndNm</label>
+                    <input type="text" formControlName="GudidBrndNm" [(ngModel)]="dataItemToEdit.GudidBrndNm" />
+                    <div [hidden]="editForm.controls.GudidBrndNm.valid || editForm.controls.GudidBrndNm.pristine" class="invalid">
+                        GudidBrndNm is required
+                    </div>
+                </div>
+                <div>
+                    <label for="LblrNm">LblrNm</label>
+                    <input type="text" formControlName="LblrNm" [(ngModel)]="dataItemToEdit.LblrNm"/>
+                </div>
+               <!-- <div>
+                    <label for="Discontinued">Discontinued</label>
+                    <input type="checkbox" formControlName="Discontinued" [(ngModel)]="dataItemToEdit.Discontinued"/>
+                </div>
+                <div>
+                    <label for="UnitsInStock">UnitsInStock</label>
+                    <input type="text" formControlName="UnitsInStock" [(ngModel)]="dataItemToEdit.UnitsInStock"/>
+                    <div [hidden]="editForm.controls.UnitsInStock.valid || editForm.controls.UnitsInStock.pristine" class="invalid">
+                        UnitsInStock must be between 0 and 99
+                    </div>
+                </div>-->
+            </form>
+
+            <kendo-dialog-actions>
+                <button class="k-button" (click)="onCancel()">Cancel</button>
+                <button class="k-button k-primary" [disabled]="!editForm.valid" (click)="onSave()">Save</button>
+            </kendo-dialog-actions>
+        </kendo-dialog>
+

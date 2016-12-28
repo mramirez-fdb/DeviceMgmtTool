@@ -1,0 +1,31 @@
+<form [formGroup]="editForm">
+                <div>
+                    <label for="GudidBrndNm">GudidBrndNm</label>
+                    <input type="text" *ngIf="dataItem" formControlName="GudidBrndNm" [(ngModel)]="dataItem.GudidBrndNm" />
+                    <div [hidden]="editForm.controls.GudidBrndNm.valid || editForm.controls.GudidBrndNm.pristine" class="invalid">
+                        GudidBrndNm is required
+                    </div>
+                </div>
+                <div>
+                    <label for="GudidDesc">GudidDesc</label>
+                    <input type="text" *ngIf="dataItem" formControlName="GudidDesc" [(ngModel)]="dataItem.GudidDesc" />
+                    <div [hidden]="editForm.controls.GudidDesc.valid || editForm.controls.GudidDesc.pristine" class="invalid">
+                        GudidBrndNm is required
+                    </div>
+                </div>
+                <div>
+                    <label for="LblrNm">LblrNm</label>
+                    <input type="text" *ngIf="dataItem" formControlName="LblrNm" [(ngModel)]="dataItem.Lblr.Nm"/>
+                </div>
+               <!-- <div>
+                    <label for="Discontinued">Discontinued</label>
+                    <input type="checkbox" formControlName="Discontinued" [(ngModel)]="dataItemToEdit.Discontinued"/>
+                </div>
+                <div>
+                    <label for="UnitsInStock">UnitsInStock</label>
+                    <input type="text" formControlName="UnitsInStock" [(ngModel)]="dataItemToEdit.UnitsInStock"/>
+                    <div [hidden]="editForm.controls.UnitsInStock.valid || editForm.controls.UnitsInStock.pristine" class="invalid">
+                        UnitsInStock must be between 0 and 99
+                    </div>
+                </div>-->
+            </form>
