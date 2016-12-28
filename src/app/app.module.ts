@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 //http://stackoverflow.com/questions/39152071/cant-bind-to-formgroup-since-it-isnt-a-known-property-of-form
 //import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { RouterModule, Routes } from '@angular/router';
+
 import { AppComponent } from './app.component';
 
 // Import ButtonsModule
@@ -42,7 +42,7 @@ import{DeviceQueueModule} from "./device-queue/device-queue.module";
   ],
   declarations: [
     AppComponent,
-    //moved this "routed" components into the app-routing.module and exported the Component array variable routedComponents instead
+    //moved these "routed" components into the app-routing.module and exported the Component array variable routedComponents instead
     //DeviceQueueComponent,
     //DeviceQueueDeviceComponent,
    // HomeComponent,
