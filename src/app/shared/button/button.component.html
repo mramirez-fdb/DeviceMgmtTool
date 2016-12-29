@@ -1,3 +1,14 @@
-<p>
-  button works!
-</p>
+<button kendoButton (click)="onButtonClick($event)" 
+  [primary]="isPrimaryColorScheme"
+  [selected]="isInSelectedState"
+  [tabIndex]="tabIndex"
+  [togglable]="isTogglableStyle"
+  [disabled]="isDisabled"
+  [icon]="themeIcon"
+  [iconClass]="iconClass"
+  [imageUrl]="imageUrl">
+  <!--https://scotch.io/tutorials/angular-2-transclusion-using-ng-content-->
+  <!--use transclusion to insert innerText from calling element -->
+  <ng-content></ng-content>
+       <!--{{buttonText}}-->
+</button>

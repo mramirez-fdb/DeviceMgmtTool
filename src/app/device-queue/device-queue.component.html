@@ -1,7 +1,4 @@
-<p>
-  device-queue works!
-</p>
-
+<div class="container">
 <kendo-grid [data]="gridView" [selectable]="true" [pageSize]="pageSize" [skip]="skip" [pageable]="{buttonCount: 4, info: true, type: 'numeric', pageSizes: true, previousNext: true}"
   [height]="500" (pageChange)="pageChange($event)">
   <kendo-grid-toolbar>
@@ -55,3 +52,4 @@
 </kendo-grid>
 <kendo-grid-edit-form [model]="dataItemToEdit" (cancel)="onCancel()" (save)="onSave($event)">
 </kendo-grid-edit-form>
+</div>

@@ -1,20 +1,18 @@
-<p>
- {{title}}
-</p>
 <div class="container">
-<button
+  <!--<button
        kendoButton
        (click)="onButtonClick()"
        [primary]="true">
        My Kendo UI Button
-     </button>
-     <br />
+     </button>-->
+  <fdb-button (click)="onButtonClick()" [isPrimaryColorScheme]="true" 
+  [buttonText]="'test'">kendo wrapper</fdb-button>
+  <br />
 
-<kendo-dropdownlist [data]="listItems"
-                    [textField]="'text'"
-                    [valueField]="'value'" >
+  <fdb-dropdown [data]="listItems" [textField]="'text'"
+   [valueField]="'value'" (selectionChange)="selectionChanged($event)">
 
-</kendo-dropdownlist>
-
-</div>
+  </fdb-dropdown>
+  <br/>
 <p>Angular 2 Version: {{ang2Version}}</p>
+</div>
