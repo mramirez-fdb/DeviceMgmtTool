@@ -33,6 +33,22 @@
         </div>
       </template>
     </kendo-grid-column>
+    <kendo-grid-column field="IsDfltStdrdDevNm">
+      <template kendoHeaderTemplate let-column let-columnIndex="columnIndex">
+        {{column.field }}
+      </template>
+      <template kendoCellTemplate let-dataItem>
+        <span>{{dataItem.IsDfltStdrdDevNm | booleanToEnglish}}</span>
+      </template>
+    </kendo-grid-column>
+    <kendo-grid-column field="IsFdbFldsKBSValdt">
+      <template kendoHeaderTemplate let-column let-columnIndex="columnIndex">
+        {{column.field }}
+      </template>
+      <template kendoCellTemplate let-dataItem>
+        <span>{{dataItem.IsFdbFldsKBSValdt | booleanToEnglish}}</span>
+      </template>
+    </kendo-grid-column>
     <kendo-grid-column>
       <template kendoCellTemplate let-dataItem>
         <button (click)="onEdit(dataItem)" class="k-button k-button-icontext k-grid-edit">Edit</button>

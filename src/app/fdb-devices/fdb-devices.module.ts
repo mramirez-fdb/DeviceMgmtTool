@@ -9,6 +9,7 @@ import{FdbDevicesRoutingModule, routedComponents} from "./fdb-devices.routing";
 import { FdbDevicesComponent }   from './fdb-devices.component';
 import { KendoGridEditDialogComponent } from '../kendo-grid-edit-dialog/kendo-grid-edit-dialog.component';
 import { LbldMedDeviceEditFormComponent } from '../lbld-med-device-edit-form/lbld-med-device-edit-form.component';
+import{DynamicDeviceFormModule} from "../dynamic-device-form/dynamic-device-form.module";
 import{SharedModule} from "../shared/shared.module";//Shared features modules must be imported by any module expecting to use it's declarables.
 @NgModule({
     //Modules do no inherit each other, so even though the FdbDevicesModule is going to be 
@@ -17,7 +18,7 @@ import{SharedModule} from "../shared/shared.module";//Shared features modules mu
     imports: [FdbDevicesRoutingModule,  
     FormsModule, ReactiveFormsModule,
     GridModule, DialogModule,
-   SharedModule],
+   DynamicDeviceFormModule, SharedModule],
     exports: [],
     declarations: [routedComponents, FdbDevicesComponent, 
     KendoGridEditDialogComponent,LbldMedDeviceEditFormComponent],
