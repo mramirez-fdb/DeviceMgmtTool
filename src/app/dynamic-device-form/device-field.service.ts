@@ -9,9 +9,10 @@ export class DeviceFieldService {
 
   toFormGroup(fields: DeviceFieldBase<any>[]){
     let group: any ={};
+    fields = fields.sort((a, b) => a.order - b.order);
     fields.forEach(field => {
-      group[field.nm] = field.required ? new FormControl(field.value || '', Validators.required)
-                                       : new FormControl(field.value || '');
+      group[field.classPropertyName] = field.required ? new FormControl(field.value, Validators.required)
+                                       : new FormControl(field.value);
     });
     return new FormGroup(group);
   }

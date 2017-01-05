@@ -15,8 +15,10 @@ export class DynamicDeviceFormComponent implements OnInit {
   @Input() fields: DeviceFieldBase<any>[] = [];
   form: FormGroup;
   payLoad = '';
-  constructor(private deviceFieldService: DeviceFieldService) { }
-  
+  constructor(private deviceFieldService: DeviceFieldService) {
+    
+   }
+
   ngOnInit() {
     this.form = this.deviceFieldService.toFormGroup(this.fields);
   }

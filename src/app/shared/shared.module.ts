@@ -7,11 +7,12 @@ import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { ButtonComponent } from './button/button.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { BooleanToEnglishPipe } from './boolean-to-english.pipe';
+import { TriStateBoolComponent } from './tri-state-bool/tri-state-bool.component';
 //https://johnpapa.net/introducing-angular-modules-feature-modules-2/
 @NgModule({
     imports: [CommonModule, FormsModule, ButtonsModule, DropDownsModule],
-    exports: [CommonModule, FormsModule, ButtonComponent, DropdownComponent, BooleanToEnglishPipe], //ButtonComponent, DateComponent
-    declarations: [ButtonComponent, DropdownComponent, BooleanToEnglishPipe], //NameComponent ButtonComponent, DateComponent
+    exports: [CommonModule, FormsModule, ButtonComponent, DropdownComponent, BooleanToEnglishPipe, TriStateBoolComponent], //ButtonComponent, DateComponent
+    declarations: [ButtonComponent, DropdownComponent, BooleanToEnglishPipe, TriStateBoolComponent], //NameComponent ButtonComponent, DateComponent
     providers: [],
 })
 export class SharedModule { }

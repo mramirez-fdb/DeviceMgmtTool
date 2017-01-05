@@ -1,11 +1,33 @@
 <div [formGroup]="form">
-  <label [attr.for]="field.nm">{{field.dispNm}}</label>
-  <div [ngSwitch]="field.controlType">
-    <input *ngSwitchCase="'textbox'" [formControlName]="field.nm"
-            [id]="field.key" [type]="field.type">
-    <select [id]="field.key" *ngSwitchCase="'dropdown'" [formControlName]="field.nm">
-      <option *ngFor="let opt of field.options" [value]="opt.key">{{opt.value}}</option>
-    </select>
-  </div> 
-  <div class="errorMessage" *ngIf="!isValid">{{field.dispNm}} is required</div>
+    <label [attr.for]="field.classPropertyName" class="col-md-2 col-sm-2 control-label">{{field.dspNm}}</label>
+    <div [ngSwitch]="field.fieldControlType" class="col-md-7 col-sm-7">
+        <input *ngSwitchCase="fieldControlType.Textbox" [formControlName]="field.classPropertyName" [id]="field.classPropertyName"
+            [type]="field.getTextboxType()" class="form-control" [style.width]="field.getTextboxWidth()">
+        <!--field.type-->
+        <textarea *ngSwitchCase="fieldControlType.Textarea" [formControlName]="field.classPropertyName" [id]="field.classPropertyName"
+            class="form-control"></textarea>
+        <div *ngSwitchCase="fieldControlType.List">
+            <div [ngSwitch]="field.dataTyp">
+                <div *ngSwitchCase="serverSideDataType.Boolean">
+                    <tri-state-bool [fieldName]="field.classPropertyName" [disabled]="false" [initialSelection]="field.value" (selectionChange)="boolDropDownValueChanged($event)">
+                    </tri-state-bool>
+                </div>
+                <div *ngSwitchDefault>
+                    <select [id]="field.classPropertyName" [formControlName]="field.classPropertyName">
+            <option *ngFor="let opt of field.options" [value]="opt.key">{{opt.value}}</option>
+        </select>
+                </div>
+            </div>
+        </div>
+        <div *ngSwitchCase="fieldControlType.Combo">
+
+            <p>Combo goes here</p>
+        </div>
+
+        <div *ngSwitchCase="fieldControlType.Grid">
+            <p>Grid goes here </p>
+        </div>
+            <div class="row errorMessage invalid alert alert-danger" *ngIf="!isValid">{{field.dspNm}} is required</div>
+
+    </div>
 </div>

@@ -34,21 +34,30 @@ export class LbldMedDeviceEditFormComponent implements OnInit {
       LblrNm: new FormControl()
     });
     this.getLbldMedDevice();
-    this.getDeviceFieldsMetadata();
+    //this.getDeviceFieldsMetadata();//need to combine the values into the formcontrols so we need to move this to after getLbldMedDevice() returns
     
   }
 
   getLbldMedDevice() {
     this.lbldMedDeviceService.getLbldMedDevice(this.id, this.dbContextLocale)
       .subscribe(result => {
-        this.dataItem = result.LabeledMedDevice
+        this.dataItem = result.LabeledMedDevice;
+        this.getDeviceFieldsMetadata();
       },
       error => { console.log(error); })
   }
   getDeviceFieldsMetadata(){
-    this.deviceFieldMetadataService.getFields()
+    this.deviceFieldMetadataService.getFieldsDictionary()//getFields()
     .subscribe(result => {
-      this.fieldMetadata = result;
+      var arrayResult = [];
+      for(var key in result){
+          var item = result[key];
+          if(this.dataItem[key] !== undefined){
+            item.value = this.dataItem[key];
+            arrayResult.push(item);
+          }
+      }
+      this.fieldMetadata = arrayResult;
     })
   }
 

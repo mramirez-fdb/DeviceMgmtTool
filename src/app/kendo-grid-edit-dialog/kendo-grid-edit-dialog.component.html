@@ -1,6 +1,11 @@
 <kendo-dialog *ngIf="active" title="Edit" (close)="onCancel()">
-  
- <lbld-med-device-edit-form [id]="deviceSummaryDataItem.Id" [dbContextLocale]="dbContextLocale">  </lbld-med-device-edit-form>
+  <div class="container" style="height: 600px; overflow-y: scroll;">
+    <div class="row">
+      <div class="col-md-11">
+      <lbld-med-device-edit-form [id]="deviceSummaryDataItem.Id" [dbContextLocale]="dbContextLocale"> </lbld-med-device-edit-form>
+      </div>
+    </div>
+  </div>
   <kendo-dialog-actions>
     <button class="k-button" (click)="onCancel()">Cancel</button>
     <button class="k-button k-primary" [disabled]="false" (click)="onSave()">Save</button>
