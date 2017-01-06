@@ -12,7 +12,8 @@ export class ButtonComponent implements OnInit, AfterContentInit { // extends Bu
 //They didn't make KendoButtonService service visible to the outside so
 //therefore could not provide the right parameters to the super() constructor
 //constructor(element: ElementRef, renderer: Renderer, service: KendoButtonService) {// super(element, renderer, service);}
-  
+  //more info on component inheritance https://scotch.io/tutorials/component-inheritance-in-angular-2
+  //and here on all the new stuff in version 2.3 https://medium.com/@gerard.sans/angular-2-new-features-in-angular-2-3-f2e73f16a09e#.yonjr8qy2
   @Input() isPrimaryColorScheme: Boolean = true;
 
   @Input() isInSelectedState: Boolean = true;

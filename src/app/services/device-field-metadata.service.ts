@@ -64,6 +64,7 @@ export class DeviceFieldMetadataService {
                         displayName: item.DspNm, 
                         required: item.IsRequired, 
                         order: item.FormOrderMagnitude,
+                        readonly: item.IsReadonly,
                         fieldControlType: fieldControlType,
                         dataTyp: dataType,
                         fieldRefValueMetadata: new FieldReferenceValueMetadata(item.FcsRstEndPnt, item.FcsHttpRqstTyp, item.FcsRoDaNm, item.FcsDaTxtFld, item.FcsDaVaFld)

@@ -13,10 +13,11 @@ export class DynamicDeviceFormComponent implements OnInit {
 
 
   @Input() fields: DeviceFieldBase<any>[] = [];
+  @Input() showSubmitButton: boolean = true;
   form: FormGroup;
   payLoad = '';
   constructor(private deviceFieldService: DeviceFieldService) {
-    
+
    }
 
   ngOnInit() {

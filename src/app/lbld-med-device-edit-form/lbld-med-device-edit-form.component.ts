@@ -1,28 +1,31 @@
 
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { LbldMedDevice } from '../models/lbld-med-device';
 import { DbContextLocale } from "../models/db-context-locale.enum";
 import { LbldMedDeviceService } from "../services/lbld-med-device.service";
 import { UserService } from "../services/user.service";
-import{DeviceFieldMetadataService} from "../services/device-field-metadata.service";
+import { DeviceFieldMetadataService } from "../services/device-field-metadata.service";
+import { DynamicDeviceFormComponent } from '../dynamic-device-form/dynamic-device-form.component';
+import { ServerSideDataType } from '../dynamic-device-form/device-field-base';
 @Component({
   selector: 'lbld-med-device-edit-form',
   templateUrl: './lbld-med-device-edit-form.component.html',
   styleUrls: ['./lbld-med-device-edit-form.component.scss'],
-  providers:[DeviceFieldMetadataService]
+  providers: [DeviceFieldMetadataService]
 })
-export class LbldMedDeviceEditFormComponent implements OnInit {
+export class LbldMedDeviceEditFormComponent implements OnInit, AfterViewInit {
   dataItem;
   editForm;
   validationsList;
   fieldMetadata;
-  @Input()
-  id: number;
-  @Input()
-  dbContextLocale: DbContextLocale;
-  @Input()
-  deviceQueueIds: number[];
+
+  @Input() id: number;
+  @Input() dbContextLocale: DbContextLocale;
+  @Input() deviceQueueIds: number[];
+
+  @ViewChild(DynamicDeviceFormComponent) dynamicDeviceForm: DynamicDeviceFormComponent;
+
   constructor(private lbldMedDeviceService: LbldMedDeviceService, private deviceFieldMetadataService: DeviceFieldMetadataService, private userService: UserService) {
 
   }
@@ -35,7 +38,11 @@ export class LbldMedDeviceEditFormComponent implements OnInit {
     });
     this.getLbldMedDevice();
     //this.getDeviceFieldsMetadata();//need to combine the values into the formcontrols so we need to move this to after getLbldMedDevice() returns
-    
+
+  }
+
+  ngAfterViewInit() {
+
   }
 
   getLbldMedDevice() {
@@ -46,30 +53,44 @@ export class LbldMedDeviceEditFormComponent implements OnInit {
       },
       error => { console.log(error); })
   }
-  getDeviceFieldsMetadata(){
+  getDeviceFieldsMetadata() {
     this.deviceFieldMetadataService.getFieldsDictionary()//getFields()
-    .subscribe(result => {
-      var arrayResult = [];
-      for(var key in result){
+      .subscribe(result => {
+        var arrayResult = [];
+        for (var key in result) {
           var item = result[key];
-          if(this.dataItem[key] !== undefined){
+          if (this.dataItem[key] !== undefined) {
+            if(item.dataTyp === ServerSideDataType.Datetime && this.dataItem[key] !== null){
+              var date = new Date(this.dataItem[key]);
+              item.value = date.toISOString().substring(0,10);//date.toLocaleDateString();
+            }else{
             item.value = this.dataItem[key];
+
+            }
             arrayResult.push(item);
           }
-      }
-      this.fieldMetadata = arrayResult;
-    })
+        }
+        this.fieldMetadata = arrayResult;
+      })
   }
 
   public onSave() {
-    this.lbldMedDeviceService.save(this.deviceQueueIds, this.dataItem)
-    .subscribe(result => {
-      this.dataItem = result.LabeledMedDevice;
-      this.validationsList = result.ValidationList;
-    });
+    //with the dynamic form inside of this template now we have to save the form's value instead
+    //of this.dataItem
+    this.lbldMedDeviceService.save(this.deviceQueueIds, this.dynamicDeviceForm.form.value) //this.dataItem
+      .subscribe(result => {
+        this.dataItem = result.LabeledMedDevice;
+        
+        this.processValidations(result.ValidationList);
+      });
   }
   public onCancel() {
 
+  }
+  private processValidations(validations: any[]){
+  this.validationsList = validations;
+  //do we need to report validations to the dynamic form?  i dont think so..
+  //this.dynamicDeviceForm.
   }
 
 }

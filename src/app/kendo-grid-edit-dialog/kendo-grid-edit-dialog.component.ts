@@ -42,7 +42,9 @@ export class KendoGridEditDialogComponent implements OnInit, AfterViewInit, Afte
   public onSave(): void {
     //this.save.emit(this.deviceSummaryDataItem);
     this.deviceEditFormComponent.onSave();
-    this.active = false;
+    //should not close automatically because save may be unsuccessful so
+    //save must report this to this form on whether to close or not
+    //this.active = false;
     //return false;
   }
   public onCancel(): void {

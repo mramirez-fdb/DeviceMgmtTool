@@ -66,6 +66,7 @@ export class DeviceFieldBase<T>{
     fieldRefValueMetadata: FieldReferenceValueMetadata;
     required: boolean;
     order: number;
+    readonly: boolean;
     //objectGraphPath: string; //not in base
 
     constructor(options: {
@@ -74,6 +75,7 @@ export class DeviceFieldBase<T>{
         classPropertyName?: string,
          displayName?: string,
         required?: boolean, order?: number,
+        readonly?: boolean,
         fieldControlType?: FieldControlType,
         dataTyp?: ServerSideDataType,
         fieldRefValueMetadata?: FieldReferenceValueMetadata
@@ -84,6 +86,7 @@ export class DeviceFieldBase<T>{
         this.dspNm = options.displayName || '';
         this.required = !!options.required;
         this.order = options.order === undefined ? 10 : options.order;
+        this.readonly = options.readonly || false,
         this.fieldControlType = options.fieldControlType || FieldControlType.Textbox;
         this.dataTyp = options.dataTyp || ServerSideDataType.String;
         this.fieldRefValueMetadata = options.fieldRefValueMetadata;
@@ -109,7 +112,7 @@ export class DeviceFieldBase<T>{
             case ServerSideDataType.String:
                 return "200px";
             case ServerSideDataType.Datetime:
-                return "100px";
+                return "200px";
             case ServerSideDataType.Integer:
             case ServerSideDataType.Decimal:
             case ServerSideDataType.Long:

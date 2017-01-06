@@ -1,3 +1,4 @@
+//CommonModule vs BrowserModule http://stackoverflow.com/questions/40096647/cant-bind-to-ngif-since-it-isnt-a-known-property-of-md-card-title
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 //http://stackoverflow.com/questions/39152071/cant-bind-to-formgroup-since-it-isnt-a-known-property-of-form

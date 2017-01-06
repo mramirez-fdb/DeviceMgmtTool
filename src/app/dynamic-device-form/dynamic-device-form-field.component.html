@@ -2,7 +2,10 @@
     <label [attr.for]="field.classPropertyName" class="col-md-2 col-sm-2 control-label">{{field.dspNm}}</label>
     <div [ngSwitch]="field.fieldControlType" class="col-md-7 col-sm-7">
         <input *ngSwitchCase="fieldControlType.Textbox" [formControlName]="field.classPropertyName" [id]="field.classPropertyName"
-            [type]="field.getTextboxType()" class="form-control" [style.width]="field.getTextboxWidth()">
+            [type]="field.getTextboxType()" class="form-control" 
+            [style.width]="field.getTextboxWidth()" 
+            [required]="field.required" [readonly]="field.readonly"/>
+            is {{field.classPropertyName}} required? : {{field.required}}
         <!--field.type-->
         <textarea *ngSwitchCase="fieldControlType.Textarea" [formControlName]="field.classPropertyName" [id]="field.classPropertyName"
             class="form-control"></textarea>
