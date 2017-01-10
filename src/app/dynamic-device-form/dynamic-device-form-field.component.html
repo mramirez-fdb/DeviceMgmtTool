@@ -8,22 +8,27 @@
             is {{field.classPropertyName}} required? : {{field.required}}
         <!--field.type-->
         <textarea *ngSwitchCase="fieldControlType.Textarea" [formControlName]="field.classPropertyName" [id]="field.classPropertyName"
-            class="form-control"></textarea>
+            class="form-control">
+        </textarea>
         <div *ngSwitchCase="fieldControlType.List">
             <div [ngSwitch]="field.dataTyp">
                 <div *ngSwitchCase="serverSideDataType.Boolean">
-                    <tri-state-bool [fieldName]="field.classPropertyName" [disabled]="false" [initialSelection]="field.value" (selectionChange)="boolDropDownValueChanged($event)">
+                    <tri-state-bool [fieldName]="field.classPropertyName" [disabled]="false" 
+                        [initialSelection]="field.value" (selectionChange)="boolDropDownValueChanged($event)">
                     </tri-state-bool>
                 </div>
                 <div *ngSwitchDefault>
                     <select [id]="field.classPropertyName" [formControlName]="field.classPropertyName">
-            <option *ngFor="let opt of field.options" [value]="opt.key">{{opt.value}}</option>
-        </select>
+                        <option *ngFor="let opt of field.options" [value]="opt.key">{{opt.value}}</option>
+                    </select>
                 </div>
             </div>
         </div>
         <div *ngSwitchCase="fieldControlType.Combo">
-
+           
+                <referential-combobox [allowCustom]="true" [filterable]="true"
+                [refMetadata]="field.fieldRefValueMetadata" [selectedObject]="form.controls[field.classPropertyName].value" >
+                </referential-combobox>
             <p>Combo goes here</p>
         </div>
 

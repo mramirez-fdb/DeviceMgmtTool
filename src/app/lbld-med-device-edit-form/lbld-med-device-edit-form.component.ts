@@ -8,6 +8,7 @@ import { UserService } from "../services/user.service";
 import { DeviceFieldMetadataService } from "../services/device-field-metadata.service";
 import { DynamicDeviceFormComponent } from '../dynamic-device-form/dynamic-device-form.component';
 import { ServerSideDataType } from '../dynamic-device-form/device-field-base';
+import{FdbNotificationMessage, FdbErrorNotificationMessage,FdbSuccessNotificationMessage, FdbNotificationSeverity} from "../shared/fdb-growl/fdb-notification-message";
 @Component({
   selector: 'lbld-med-device-edit-form',
   templateUrl: './lbld-med-device-edit-form.component.html',
@@ -19,7 +20,7 @@ export class LbldMedDeviceEditFormComponent implements OnInit, AfterViewInit {
   editForm;
   validationsList;
   fieldMetadata;
-
+  messages: FdbNotificationMessage[] = [];
   @Input() id: number;
   @Input() dbContextLocale: DbContextLocale;
   @Input() deviceQueueIds: number[];
@@ -79,9 +80,16 @@ export class LbldMedDeviceEditFormComponent implements OnInit, AfterViewInit {
     //of this.dataItem
     this.lbldMedDeviceService.save(this.deviceQueueIds, this.dynamicDeviceForm.form.value) //this.dataItem
       .subscribe(result => {
-        this.dataItem = result.LabeledMedDevice;
-        
+        if(result.ValidationList != null && result.ValidationList.length > 0){
+          this.messages.push(new FdbErrorNotificationMessage("Not Saved", "Please check validation messages"))
         this.processValidations(result.ValidationList);
+        }else{
+        this.dataItem = result.LabeledMedDevice;
+        this.processValidations(null);
+        this.messages.push(new FdbSuccessNotificationMessage("Saved successfully", "Device changes were saved"));
+        }
+       
+
       });
   }
   public onCancel() {

@@ -1,6 +1,12 @@
-<select [attr.name]="elementName" [attr.id]="elementId" [ngModel]="selectedBoolState" [disabled]="disabled"
+<!--<select [attr.name]="elementName" [attr.id]="elementId" [ngModel]="selectedBoolState" [disabled]="disabled"
 (ngModelChange)="onChange($event)">
   <option value="null"></option> 
   <option value="true">Yes</option>  
   <option value="false">No</option> 
-</select>
+  <option *ngFor="let item of items" [value]="item.value">{{item.text}}</option>
+</select>-->
+
+<fdb-dropdown [data]="items" [textField]="'text'" [popupSettings]="{width: 'inherit', height: 'auto'}"
+   [valueField]="'value'" (selectionChange)="onChange($event)" >
+
+  </fdb-dropdown>

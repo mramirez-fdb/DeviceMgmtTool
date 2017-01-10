@@ -11,6 +11,7 @@ import { KendoGridEditDialogComponent } from '../kendo-grid-edit-dialog/kendo-gr
 import { LbldMedDeviceEditFormComponent } from '../lbld-med-device-edit-form/lbld-med-device-edit-form.component';
 import{DynamicDeviceFormModule} from "../dynamic-device-form/dynamic-device-form.module";
 import{SharedModule} from "../shared/shared.module";//Shared features modules must be imported by any module expecting to use it's declarables.
+
 @NgModule({
     //Modules do no inherit each other, so even though the FdbDevicesModule is going to be 
     //imported by the AppModule (which imports the SharedModule already), 

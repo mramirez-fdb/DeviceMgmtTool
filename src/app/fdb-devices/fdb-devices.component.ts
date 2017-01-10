@@ -7,6 +7,7 @@ import {
   PageChangeEvent
 } from '@progress/kendo-angular-grid';
 import {KendoGridEditDialogComponent} from "../kendo-grid-edit-dialog/kendo-grid-edit-dialog.component";
+import{Message} from "primeng/primeng";
 @Component({
   selector: 'app-fdb-devices',
   templateUrl: './fdb-devices.component.html',
@@ -15,6 +16,7 @@ import {KendoGridEditDialogComponent} from "../kendo-grid-edit-dialog/kendo-grid
 })
 export class FdbDevicesComponent implements OnInit, AfterViewInit {
   public dataItemToEdit: FdbDevice;
+  messages: Message[] = [];
   private fdbDevicesData: FdbDevice[];
   private gridView: GridDataResult;
   private pageSize: number = 10;
@@ -62,7 +64,7 @@ public onEdit(dataItem: FdbDevice): void {
         });*/
   }
   public addFdbDevice(): void{
-
+this.messages.push({severity: "info", summary: "testing", detail:"more stuff here"});
   }
   protected pageChange(event: PageChangeEvent): void {
     this.skip = event.skip;

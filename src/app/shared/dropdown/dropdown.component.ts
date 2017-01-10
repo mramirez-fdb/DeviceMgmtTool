@@ -18,7 +18,7 @@ export class DropdownComponent implements OnInit, AfterContentInit, AfterViewIni
 
   @Input() valueField: string;
 
-  @Input() popupSettings: {height: number, width: number} = {height: 200, width: 200};
+  @Input() popupSettings: {height: string, width: string} = {height: "200", width: "200"};
 
   @Input() defaultItem: any;
 

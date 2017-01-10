@@ -27,7 +27,7 @@
       </template>
     </kendo-grid-column>
     <kendo-grid-column field="LbldMedDevIdntfrs">
-      <template kendoCellTemplate let-dataItem>
+      <template kendoGridCellTemplate let-dataItem>
         <div *ngIf="dataItem.LbldMedDevIdntfrs">
           <span class="label label-primary">{{dataItem.LbldMedDevIdntfrs.length}}</span>
         </div>
@@ -37,7 +37,7 @@
       <template kendoHeaderTemplate let-column let-columnIndex="columnIndex">
         {{column.field }}
       </template>
-      <template kendoCellTemplate let-dataItem>
+      <template kendoGridCellTemplate let-dataItem>
         <span>{{dataItem.IsDfltStdrdDevNm | booleanToEnglish}}</span>
       </template>
     </kendo-grid-column>
@@ -45,12 +45,12 @@
       <template kendoHeaderTemplate let-column let-columnIndex="columnIndex">
         {{column.field }}
       </template>
-      <template kendoCellTemplate let-dataItem>
+      <template kendoGridCellTemplate let-dataItem>
         <span>{{dataItem.IsFdbFldsKBSValdt | booleanToEnglish}}</span>
       </template>
     </kendo-grid-column>
     <kendo-grid-column>
-      <template kendoCellTemplate let-dataItem>
+      <template kendoGridCellTemplate let-dataItem>
         <button (click)="onEdit(dataItem)" class="k-button k-button-icontext k-grid-edit">Edit</button>
       </template>
     </kendo-grid-column>
@@ -69,3 +69,5 @@
 
   </kendo-grid-edit-dialog>
 </div>
+
+<fdb-growl  [messages]="messages" [lifeInMilliseconds]="6000" [isSticky]="true"></fdb-growl>

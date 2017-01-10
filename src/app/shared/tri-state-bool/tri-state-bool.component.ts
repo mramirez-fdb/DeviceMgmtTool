@@ -9,6 +9,7 @@ export class TriStateBoolComponent implements OnInit {
   selectedBoolState;
   elementName: string;
   elementId: string;
+  items: Array<{text: string, value: string}> = [{text: "", value: "null"}, {text: "Yes", value: "true"}, {text: "No", value: "false"}];
 
   @Input() fieldName: string;
   @Input() disabled: boolean;
@@ -28,7 +29,7 @@ export class TriStateBoolComponent implements OnInit {
 
   onChange(e) {
     let boolVal = null;
-    switch (e) {
+    switch (e.value) {
       case "true":
         boolVal = true;
         break;

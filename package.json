@@ -20,11 +20,11 @@
     "@angular/platform-browser": "~2.3.0",
     "@angular/platform-browser-dynamic": "~2.3.0",
     "@angular/router": "~3.4.0",
-    "@progress/kendo-angular-buttons": "^0.13.2",
-    "@progress/kendo-angular-dialog": "^0.13.1",
-    "@progress/kendo-angular-dropdowns": "^0.16.10",
-    "@progress/kendo-angular-grid": "^0.7.0",
-    "@progress/kendo-data-query": "^0.3.3",
+    "@progress/kendo-angular-buttons": "^0.14.5",
+    "@progress/kendo-angular-dialog": "^0.13.3",
+    "@progress/kendo-angular-dropdowns": "^0.24.1",
+    "@progress/kendo-angular-grid": "^0.11.0",
+    "@progress/kendo-data-query": "^0.3.4",
     "@telerik/kendo-theme-default": "^1.30.0",
     "angularfire2": "^2.0.0-beta.6",
     "bootstrap-sass": "^3.3.7",
@@ -33,7 +33,9 @@
     "firebase": "^3.6.0",
     "rxjs": "5.0.0-beta.12",
     "ts-helpers": "^1.1.1",
-    "zone.js": "^0.6.23"
+    "zone.js": "^0.6.23",
+    "primeng": "1.1.4",
+    "font-awesome": "4.7.0"
   },
   "devDependencies": {
     "@types/d3": "^4.3.0",

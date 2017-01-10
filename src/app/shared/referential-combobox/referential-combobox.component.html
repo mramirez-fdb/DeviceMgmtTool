@@ -1,0 +1,15 @@
+<kendo-combobox [data]="data" 
+[disabled]="disabled" 
+[filterable]="filterable"
+[placeholder]="placeholder"
+[textField]="textField" [valueField]="valueField"
+[valuePrimitive]="valuePrimitive"
+[value]="selectedObject"
+[tabIndex]="tabIndex"
+ [allowCustom]="allowCustom" 
+ [filterable]="filterable"
+ (selectionChange)="selectionChangeHandler($event)"
+ (valueChange)="valueChangeHandler($event)" 
+ (filterChange)="filterChangeHandler($event)">
+               
+</kendo-combobox>
