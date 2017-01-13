@@ -10,6 +10,10 @@
  [filterable]="filterable"
  (selectionChange)="selectionChangeHandler($event)"
  (valueChange)="valueChangeHandler($event)" 
- (filterChange)="filterChangeHandler($event)">
+ (filterChange)="filterChangeHandler($event)"
+ (ngChange)="onNgChange($event)">
                
 </kendo-combobox>
+
+<!--
+<p-autoComplete [(ngModel)]="text" [suggestions]="results" (completeMethod)="search($event)"></p-autoComplete>-->

@@ -8,6 +8,11 @@ const routes: Routes = [
     component: FdbDevicesComponent,
     data: {
       title: 'Fdb Devices'
+    } },
+    { path: 'fdb-devices/:id',
+    component: FdbDevicesComponent,
+    data: {
+      title: 'Fdb Devices'
     } }
 ];
 

@@ -2,7 +2,9 @@ import { Component, OnInit,Input, ViewChild, AfterViewInit } from '@angular/core
 import{FormGroup, FormControlName} from "@angular/forms";
 import{FieldReferenceValueMetadata, HttpRequestType} from "../../dynamic-device-form/device-field-base";
 import{ComboBoxComponent} from "@progress/kendo-angular-dropdowns";
+
 import {ReferenceListDataService} from "../../services/reference-list-data.service";
+import {AutoComplete} from "primeng/primeng"
 @Component({
   selector: 'referential-combobox',
   templateUrl: './referential-combobox.component.html',
@@ -17,7 +19,8 @@ placeholder: string = "select...";
 tabIndex: number = 1;
 valuePrimitive: boolean = false;
 disabled: boolean = false;
-@Input() selectedObject: any;
+selectedObject: {Id: number, Nm: string} = {Id: 0, Nm: "hi"};
+@Input() initialValue: any;
 @Input() allowCustom: boolean;
 @Input() refMetadata: FieldReferenceValueMetadata;
 @Input() filterable: boolean;
@@ -32,7 +35,14 @@ disabled: boolean = false;
     this.getData();
   }
   ngAfterViewInit(){
-   
+  this.setValue(this.initialValue);
+  this.comboBoxComponent.handleBlur = () => {
+    this.comboBoxComponent.open = false;
+  };
+  this.comboBoxComponent.handleFocus = () => {
+    this.comboBoxComponent.open = true;
+  };
+ 
  }
   getData(){
     this.data = new Array<any>();
@@ -40,17 +50,22 @@ disabled: boolean = false;
       this.refListDataService.getDataByGet(this.refMetadata)
     .subscribe((result: any) => {
       this.data = result;
+      
     },
     error => { console.log(error); });
     else if(this.refMetadata.HttpRequestType === HttpRequestType.Post)
       this.refListDataService.getDataByPost(this.refMetadata, {})
       .subscribe((result: any) => {
         this.data = result;
+
       },
-      error => { console.log(error); })
+      error => { console.log(error); });
+      
   }
   setValue(value: any){
-   // this.comboBoxComponent.value
+    if(value != null)
+   // this.comboBoxComponent.value = value;
+   this.selectedObject = value;
   }
   extractMetadata(){
     this.textField = this.refMetadata.DataTextFieldName;
@@ -64,6 +79,9 @@ disabled: boolean = false;
 
   }
   filterChangeHandler(e){
+
+  }
+  onNgChange(e){
 
   }
 

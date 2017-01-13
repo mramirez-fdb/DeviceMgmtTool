@@ -11,12 +11,12 @@ import { TriStateBoolComponent } from './tri-state-bool/tri-state-bool.component
 import { ReferentialComboboxComponent } from './referential-combobox/referential-combobox.component';
 
 /*try out the primeng widgets */
-import {GrowlModule, Message, Growl} from "primeng/primeng";
+import {GrowlModule, Message, Growl, AutoCompleteModule} from "primeng/primeng";
 import { FdbGrowlComponent } from './fdb-growl/fdb-growl.component';
 import{DomHandler} from "primeng/components/dom/domhandler";
 //https://johnpapa.net/introducing-angular-modules-feature-modules-2/
 @NgModule({
-    imports: [CommonModule, FormsModule, ButtonsModule, DropDownsModule, ComboBoxModule, GrowlModule],
+    imports: [CommonModule, FormsModule, ButtonsModule, DropDownsModule, ComboBoxModule, GrowlModule, AutoCompleteModule],
     exports: [CommonModule, FormsModule, ButtonComponent, DropdownComponent, 
     FdbGrowlComponent, BooleanToEnglishPipe, TriStateBoolComponent, ReferentialComboboxComponent], //ButtonComponent, DateComponent
     declarations: [ButtonComponent, DropdownComponent, BooleanToEnglishPipe, 

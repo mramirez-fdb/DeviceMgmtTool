@@ -27,13 +27,14 @@
         <div *ngSwitchCase="fieldControlType.Combo">
            
                 <referential-combobox [allowCustom]="true" [filterable]="true"
-                [refMetadata]="field.fieldRefValueMetadata" [selectedObject]="form.controls[field.classPropertyName].value" >
+                [refMetadata]="field.fieldRefValueMetadata" [initialValue]="form.controls[field.classPropertyName].value" >
                 </referential-combobox>
             <p>Combo goes here</p>
         </div>
 
         <div *ngSwitchCase="fieldControlType.Grid">
             <p>Grid goes here </p>
+            <dynamic-grid [items]="field.value" [fieldName]="field.classPropertyName"></dynamic-grid>
         </div>
             <div class="row errorMessage invalid alert alert-danger" *ngIf="!isValid">{{field.dspNm}} is required</div>
 
