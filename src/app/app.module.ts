@@ -20,11 +20,14 @@ import { HomeComponent } from './home/home.component';
 //now imported in FdbDevicesModule import { KendoGridEditDialogComponent } from './kendo-grid-edit-dialog/kendo-grid-edit-dialog.component';
 //now imported in FdbDevicesModule import { LbldMedDeviceEditFormComponent } from './lbld-med-device-edit-form/lbld-med-device-edit-form.component';
 //now imported in FdbDevicesModule import { FdbDevicesComponent } from './fdb-devices/fdb-devices.component';
-import { AppRoutingModule, routedComponents } from './app-routing.module';
+import { AppRoutingModule, routedComponents, authProviders } from './app-routing.module';
 import {SharedModule} from "./shared/shared.module";
 import{FdbDevicesModule} from "./fdb-devices/fdb-devices.module";
 import{DeviceQueueModule} from "./device-queue/device-queue.module";
-
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+import { LoginComponent } from './login/login.component';
+import{AuthService} from "./services/auth.service";
+import { AuthDashboardTesterComponent } from './auth-dashboard-tester/auth-dashboard-tester.component';
 
 @NgModule({
   imports: [
@@ -52,9 +55,12 @@ import{DeviceQueueModule} from "./device-queue/device-queue.module";
   //moved to FdbDevicesModule because fdbdevicescomponent uses it  KendoGridEditDialogComponent,
   //moved to FdbDevicesModule because fdbdevicescomponent uses it  LbldMedDeviceEditFormComponent,
    // FdbDevicesComponent
-   routedComponents
+   routedComponents,
+    UnauthorizedComponent,
+    LoginComponent,
+    AuthDashboardTesterComponent
   ],
-  providers: [],
+  providers: [authProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
