@@ -7,27 +7,52 @@ import {environment} from "../";
 @Injectable()
 export class AuthService {
   mgr: UserManager = new UserManager(settings);//defined in cost object below
-  userLoadededEvent: EventEmitter<User> = new EventEmitter<User>();
+  userLoadedEvent: EventEmitter<User> = new EventEmitter<User>();
+  userUnloadedEvent: EventEmitter<User> = new EventEmitter<User>();
   currentUser: User;
   loggedIn: boolean = false;
 
   authHeaders: Headers;
   constructor(private http: Http) {
+    
     this.mgr.getUser()
     .then((user) => {
       if(user){
         this.loggedIn = true;
         this.currentUser = user;
-        this.userLoadededEvent.emit(user);
+        this.userLoadedEvent.emit(user);
       }else{
         this.loggedIn = false;
+        this.userLoadedEvent.emit(null);
       }
     }).catch((err) =>{
       this.loggedIn = false;
     });
+
     this.mgr.events.addUserUnloaded((e) => {
       if (!environment.production) {
         console.log("user unloaded");
+      }
+      this.loggedIn = false;
+      this.userUnloadedEvent.emit(this.currentUser);
+    });
+
+    this.mgr.events.addAccessTokenExpiring((e) => {
+      if (!environment.production) {
+        console.log("the user token is expering now");
+      }
+    });
+
+    this.mgr.events.addAccessTokenExpired((e) => {
+      if (!environment.production) {
+        console.log("the user token is expired");
+      }
+      this.loggedIn = false;
+    });
+
+    this.mgr.events.addUserSignedOut((e) => {
+      if (!environment.production) {
+        console.log("the user has signed out");
       }
       this.loggedIn = false;
     });
@@ -44,7 +69,7 @@ clearState() {
   getUser() {
     this.mgr.getUser().then((user) => {
       console.log("got user", user);
-      this.userLoadededEvent.emit(user);
+      this.userLoadedEvent.emit(user);
     }).catch(function (err) {
       console.log(err);
     });
@@ -52,7 +77,7 @@ clearState() {
 
 removeUser() {
     this.mgr.removeUser().then(() => {
-      this.userLoadededEvent.emit(null);
+      this.userLoadedEvent.emit(null);
       console.log("user removed");
     }).catch(function (err) {
       console.log(err);

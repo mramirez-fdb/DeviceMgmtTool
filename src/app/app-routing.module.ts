@@ -27,7 +27,7 @@ const appRoutes: Routes = [
   //   }
   // },
   { path: '', redirectTo: "/home", pathMatch: 'full' }, //nothing to show in home so redirect to this route on default route
-  {path: "home", component: HomeComponent},
+  {path: "home", component: HomeComponent, canActivate:[AuthGuardService]},
   {path: "unauthorized", component: UnauthorizedComponent},
   {path: "dashboard", component: AuthDashboardTesterComponent}
   //{ path: '**', component: PageNotFoundComponent }

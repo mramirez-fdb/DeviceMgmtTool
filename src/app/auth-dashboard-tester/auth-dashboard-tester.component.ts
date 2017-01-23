@@ -14,7 +14,7 @@ export class AuthDashboardTesterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadedUserSub = this.authService.userLoadededEvent
+    this.loadedUserSub = this.authService.userLoadedEvent
       .subscribe(user => {
         this._user = user;
       });
