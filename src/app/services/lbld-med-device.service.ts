@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from "@angular/http";
 import { FdbDeviceSearchCriteria } from "../models/kendo-criteria";
 import { FdbDeviceSearchResponse } from "../models/fdb-device";
+import {AuthService} from "./auth.service";
 import{LbldMedDevice, LbldMedDeviceResponse, LbldMedDeviceSaveResponse} from "../models/lbld-med-device";
 import {DbContextLocale} from "../models/db-context-locale.enum";
 import { Observable } from 'rxjs/Rx';
@@ -12,12 +13,12 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class LbldMedDeviceService {
   private lbldMedDevAPIUrl: string = "http://localhost:46097/api/lmd/";
-  constructor(private http: Http) { 
+  constructor(private http: Http, private authHttp: AuthService) { 
 
   }
 
   getFdbDevices(state: string, criteria: FdbDeviceSearchCriteria): Observable<FdbDeviceSearchResponse> {
-    return this.http.post(this.lbldMedDevAPIUrl + "list/" + state,
+    return this.authHttp.AuthPost(this.lbldMedDevAPIUrl + "list/" + state,
       criteria)
       .map((res: Response) => {
         var data: any = res.json();
@@ -29,7 +30,7 @@ export class LbldMedDeviceService {
 
   getLbldMedDevice(id: number, dbContextLocale: DbContextLocale = DbContextLocale.Working, 
   comparerIds: boolean = false, setHasBeenPublished: boolean = false): Observable<LbldMedDeviceResponse>{
-    return this.http.get(this.lbldMedDevAPIUrl + id +"?DbContextLocale="+ dbContextLocale+"&comparerIds="+comparerIds+"&setHasBeenPublished="+ setHasBeenPublished)
+    return this.authHttp.AuthGet(this.lbldMedDevAPIUrl + id +"?DbContextLocale="+ dbContextLocale+"&comparerIds="+comparerIds+"&setHasBeenPublished="+ setHasBeenPublished)
     .map((res: Response) => res.json())
     .map((devices: LbldMedDeviceResponse) => devices)
     .catch((error: Response | any) => Observable.throw(error.json().error || "Server Error"));

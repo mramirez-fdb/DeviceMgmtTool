@@ -13,8 +13,16 @@ export class AuthGuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean { //
     //if(this.authService.loggedIn) {return true;}
     //this.router.navigate(["unauthorized"]);
-
-    return new Promise((resolve, reject) => {
+    return this.authService.getUser().then(user => {
+      if(user == null || user.expired)
+      {
+        this.router.navigate(["unauthorized"]);
+        return false;
+      }else{
+        return true;
+      }
+    });
+    /*return new Promise((resolve, reject) => {
       if (this.authService.loggedIn) { return resolve(true); }
       else {
         if (!this.hasCurrentUserData) {
@@ -37,8 +45,7 @@ export class AuthGuardService implements CanActivate {
           return reject(false);
         }
       }
-
-    });
+    });*/
   }
 }
 

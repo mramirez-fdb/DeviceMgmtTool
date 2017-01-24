@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Http, Response} from "@angular/http";
+import {AuthService} from "./auth.service";
 import {DeviceQueueDevice, DeviceQueueDeviceResult} from "../models/device-queue-device";
 import {DeviceQueueDevices} from "../mock-device-queue";
 import {Observable} from 'rxjs/Rx';
@@ -11,7 +12,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class DeviceQueueService {
 private deviceQueueAPIUrl: string = "http://localhost:46097/api/devicequeue";
-  constructor(private http: Http) { }
+  constructor(private http: Http, private authHttp: AuthService) { }
 
   getDevices(): DeviceQueueDevice[]{
     return DeviceQueueDevices;
@@ -33,7 +34,7 @@ private deviceQueueAPIUrl: string = "http://localhost:46097/api/devicequeue";
 
   }
   getDevicesViaObserWithPaging(kendoCriteria): Observable<DeviceQueueDeviceResult>{
-  return this.http.post(this.deviceQueueAPIUrl, 
+  return this.authHttp.AuthPost(this.deviceQueueAPIUrl, 
        kendoCriteria)
        .map((res:Response) => {
          return {"Devices": res.json().DevQueueDevs,  "Total": res.json().TotlRsltCnt}

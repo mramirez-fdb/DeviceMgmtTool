@@ -24,6 +24,8 @@ FDB
       <a routerLink="/fdb-devices"  routerLinkActive="active">fdb devices </a>
     </li>
   </ul>
+  <div *ngIf="isExpired">Please Log In</div>
+  <div *ngIf="!isExpired" class="pull-right" > {{displayName}} </div>
 </div>
 </div>
 </nav>

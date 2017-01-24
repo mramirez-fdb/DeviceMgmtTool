@@ -5,16 +5,16 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
-
+import {AuthService} from "./auth.service";
 import { DeviceFieldBase, FieldControlType, ServerSideDataType, FieldReferenceValueMetadata } from "../dynamic-device-form/device-field-base";
 import { fieldMetadata } from "../mock-field-metadata";
 @Injectable()
 export class DeviceFieldMetadataService {
     private metadataAPIUrl: string = "http://localhost:46097/api/bulk/";
-    constructor(private http: Http) { }
+    constructor(private http: Http, private authHttp: AuthService) { }
 
     getFields(): Observable<DeviceFieldBase<any>[]> {
-        return this.http.get(this.metadataAPIUrl + "fields")
+        return this.authHttp.AuthGet(this.metadataAPIUrl + "fields")
             .map((res: Response) => {
                 var json = res.json();
                 //warning here we instead mock the data and not use the one returned by service because data from service is lacking
@@ -45,7 +45,7 @@ export class DeviceFieldMetadataService {
     }
 
     getFieldsDictionary(): Observable<DeviceFieldBase<any>[]> {
-        return this.http.get(this.metadataAPIUrl + "fields")
+        return this.authHttp.AuthGet(this.metadataAPIUrl + "fields")
             .map((res: Response) => {
                 var json = res.json();
                 //warning here we instead mock the data and not use the one returned by service because data from service is lacking

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Rx';
 import { UserManager, Log, MetadataService, User, UserManagerSettings } from 'oidc-client';
 import {environment} from "../";
 @Injectable()
-export class AuthService {
+export class AuthService  {
   mgr: UserManager = new UserManager(settings);//defined in cost object below
   userLoadedEvent: EventEmitter<User> = new EventEmitter<User>();
   userUnloadedEvent: EventEmitter<User> = new EventEmitter<User>();
@@ -15,7 +15,7 @@ export class AuthService {
   authHeaders: Headers;
   constructor(private http: Http) {
     
-    this.mgr.getUser()
+    /*this.mgr.getUser()
     .then((user) => {
       if(user){
         this.loggedIn = true;
@@ -27,7 +27,11 @@ export class AuthService {
       }
     }).catch((err) =>{
       this.loggedIn = false;
-    });
+    });*/
+    console.log("AuthService constructor now executing")
+    this.getUser().then((user) => {
+      console.log("constructor got user");
+     });;
 
     this.mgr.events.addUserUnloaded((e) => {
       if (!environment.production) {
@@ -57,6 +61,7 @@ export class AuthService {
       this.loggedIn = false;
     });
    }
+   
 
 clearState() {
     this.mgr.clearStaleState().then(function () {
@@ -66,11 +71,22 @@ clearState() {
     });
   }
 
-  getUser() {
-    this.mgr.getUser().then((user) => {
-      console.log("got user", user);
-      this.userLoadedEvent.emit(user);
+  getUser(): Promise<User> {
+    return this.mgr.getUser()
+    .then((user) => {
+      if(user){
+        console.log("got user", user);
+        this.loggedIn = true;
+        this.currentUser = user;
+        this.userLoadedEvent.emit(user);
+        return user;
+      }else{
+        this.loggedIn = false;
+        this.userLoadedEvent.emit(null);
+        return null;
+      }          
     }).catch(function (err) {
+      this.loggedIn = false;
       console.log(err);
     });
   }
@@ -166,6 +182,7 @@ removeUser() {
   AuthPost(url: string, data: any, options?: RequestOptions): Observable<Response> {
 
     let body = JSON.stringify(data);
+    this._setAuthHeaders(this.currentUser);
 
     if (options) {
       options = this._setRequestOptions(options);
