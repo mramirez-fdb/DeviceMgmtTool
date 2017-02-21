@@ -59,6 +59,7 @@ import { AuthDashboardTesterComponent } from './auth-dashboard-tester/auth-dashb
     UnauthorizedComponent,
     LoginComponent,
     AuthDashboardTesterComponent
+    
   ],
   providers: [authProviders],
   bootstrap: [AppComponent]

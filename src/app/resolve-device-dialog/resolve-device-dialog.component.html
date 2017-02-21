@@ -1,0 +1,7 @@
+<kendo-dialog *ngIf="open" title="Resolve" (close)="onCancel()">
+  <p>This device queue item has the following options:</p>
+  <kendo-dialog-actions>
+    <button class="k-button" (click)="onCancel()">Cancel</button>
+    <button class="k-button k-primary" [disabled]="false" (click)="onSave()">Save</button>
+  </kendo-dialog-actions>
+</kendo-dialog>

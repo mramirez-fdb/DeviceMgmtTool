@@ -181,7 +181,7 @@ removeUser() {
    */
   AuthPost(url: string, data: any, options?: RequestOptions): Observable<Response> {
 
-    let body = JSON.stringify(data);
+    let body = data; //JSON.stringify(data);
     this._setAuthHeaders(this.currentUser);
 
     if (options) {
@@ -205,7 +205,7 @@ removeUser() {
       options.headers.append(this.authHeaders.keys[0], this.authHeaders.values[0]);
     }
     else {
-      options = new RequestOptions({ headers: this.authHeaders, body: "" });
+      options = new RequestOptions({ headers: this.authHeaders });  //, body: ""
     }
 
     return options;

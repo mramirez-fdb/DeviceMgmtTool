@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { DeviceQueueService } from "../services/device-queue.service";
 import { DeviceQueueDevice } from "../models/device-queue-device";
+
 import {
   GridDataResult,
-  PageChangeEvent
+  PageChangeEvent, GridComponent
 } from '@progress/kendo-angular-grid';
 import { DeviceQueueDeviceComponent } from '../device-queue-device/device-queue-device.component';
 
@@ -13,18 +14,28 @@ import { DeviceQueueDeviceComponent } from '../device-queue-device/device-queue-
   styleUrls: ['./device-queue.component.scss'],
   providers: [DeviceQueueService]
 })
-export class DeviceQueueComponent implements OnInit {
+export class DeviceQueueComponent implements OnInit, AfterViewInit {
   public dataItemToEdit: DeviceQueueDevice;
+  public openResolve: boolean;
+
   private deviceQueueData: DeviceQueueDevice[];
   private gridView: GridDataResult;
   private pageSize: number = 10;
   private page: number = 1;
   private skip: number = 0;
+  @ViewChild(GridComponent)  gridComponent: GridComponent;
+
+  @ViewChild(DeviceQueueDeviceComponent) protected editFormComponent: DeviceQueueDeviceComponent;
+
   constructor(private deviceQueueService: DeviceQueueService) { }
 
   ngOnInit() {
 
     this.getDevices();
+  }
+
+  ngAfterViewInit(){
+    //this.gridComponent.pageChange.do(())
   }
   getDevices() {
     //this works this.deviceQueueData = this.deviceQueueService.getDevices();
@@ -44,6 +55,10 @@ export class DeviceQueueComponent implements OnInit {
       },
       error => { console.log(error); }
     )
+  }
+
+  resolve(dataItem: DeviceQueueDevice){
+    this.openResolve = true;
   }
 
   public onEdit(dataItem: any): void {
@@ -66,6 +81,7 @@ export class DeviceQueueComponent implements OnInit {
         });*/
   }
 
+
   protected pageChange(event: PageChangeEvent): void {
     this.skip = event.skip;
     this.pageSize = event.take;
@@ -73,7 +89,6 @@ export class DeviceQueueComponent implements OnInit {
     this.getDevices();
   }
 
-  @ViewChild(DeviceQueueDeviceComponent)
-  protected editFormComponent: DeviceQueueDeviceComponent;
+  
 
 }
