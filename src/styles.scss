@@ -1,8 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@telerik/kendo-theme-default/styles/packages/all";
+/*@import "~@telerik/kendo-theme-default/styles/packages/all";*/
+@import "~@progress/kendo-theme-default/scss/all.scss";
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 @import "~primeng/resources/themes/omega/theme.css";
 $icon-font-path: "~font-awesome/fonts/";
 @import "~primeng/resources/primeng.min.css";
-@import "~font-awesome/css/font-awesome.min.css"
+@import "~font-awesome/css/font-awesome.min.css";
+

@@ -12,17 +12,17 @@
 
     </kendo-grid-column>
     <kendo-grid-column field="GTIN">
-      <template kendoHeaderTemplate let-column let-columnIndex="columnIndex">
+      <template kendoGridHeaderTemplate let-column let-columnIndex="columnIndex">
         {{column.field}}
       </template>
     </kendo-grid-column>
     <kendo-grid-column field="GudidBrndNm">
-      <template kendoHeaderTemplate let-column let-columnIndex="columnIndex">
-        {{column.field}}
+      <template kendoGridHeaderTemplate let-column let-columnIndex="columnIndex">
+        Gudid Brnd Nm
       </template>
     </kendo-grid-column>
     <kendo-grid-column field="LblrNm">
-      <template kendoHeaderTemplate let-column let-columnIndex="columnIndex">
+      <template kendoGridHeaderTemplate let-column let-columnIndex="columnIndex">
         {{column.field}}
       </template>
     </kendo-grid-column>
@@ -34,7 +34,7 @@
       </template>
     </kendo-grid-column>
     <kendo-grid-column field="IsDfltStdrdDevNm">
-      <template kendoHeaderTemplate let-column let-columnIndex="columnIndex">
+      <template kendoGridHeaderTemplate let-column let-columnIndex="columnIndex">
         {{column.field }}
       </template>
       <template kendoGridCellTemplate let-dataItem>
@@ -42,7 +42,7 @@
       </template>
     </kendo-grid-column>
     <kendo-grid-column field="IsFdbFldsKBSValdt">
-      <template kendoHeaderTemplate let-column let-columnIndex="columnIndex">
+      <template kendoGridHeaderTemplate let-column let-columnIndex="columnIndex">
         {{column.field }}
       </template>
       <template kendoGridCellTemplate let-dataItem>

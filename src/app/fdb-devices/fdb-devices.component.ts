@@ -42,7 +42,7 @@ export class FdbDevicesComponent implements OnInit, AfterViewInit {
         }
       },
       error => { console.log(error); }
-    )
+    );
   }
 public onEdit(dataItem: FdbDevice): void {
     this.dataItemToEdit = dataItem;
